@@ -10,12 +10,12 @@ stop_game = 0
 
 
 
-
 def main():
     pygame.init
 
 
     dt = 0
+
     frame_rate_clock = pygame.time.Clock()
 
     player_character = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -27,15 +27,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-
         pygame.Surface.fill(screen, [0,0,0])
-
         player_character.draw(screen)
+
+        player_character.update(dt)
+
+
 
         pygame.display.flip()
 
-        
-
+    
 
         dt = frame_rate_clock.tick(60)
         dt /= 1000
