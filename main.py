@@ -8,7 +8,10 @@ from player import Player
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 stop_game = 0
 
+updatable_group = pygame.sprite.Group()
+drawable_group = pygame.sprite.Group()
 
+Player.containers = (updatable_group, drawable_group)
 
 def main():
     pygame.init
@@ -28,9 +31,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
         pygame.Surface.fill(screen, [0,0,0])
-        player_character.draw(screen)
-
-        player_character.update(dt)
+        updatable_group.update(dt)
+        for object in drawable_group:
+            object.draw(screen)
 
 
 
