@@ -25,6 +25,8 @@ def main():
 
     Asteroid_Field = AsteroidField()
 
+    score = 0
+
     dt = 0
 
     frame_rate_clock = pygame.time.Clock()
@@ -45,13 +47,14 @@ def main():
 
         for asteroid in asteroids:
             if player_character.collision_check(asteroid):
-                sys.exit("Game Over!")
+                sys.exit(f"Game Over! Score: {score}")
 
         for asteroid in asteroids:
             for shot in shots:
                 if shot.collision_check(asteroid):
                     shot.kill()
                     asteroid.split()
+                    score += 10
 
 
 
