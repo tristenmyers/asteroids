@@ -25,6 +25,7 @@ def main():
 
     Asteroid_Field = AsteroidField()
 
+    lives = 3
     score = 0
 
     dt = 0
@@ -36,6 +37,7 @@ def main():
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
+    print(f"Starting Lives: {lives}")
     while stop_game == 0:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -47,7 +49,11 @@ def main():
 
         for asteroid in asteroids:
             if player_character.collision_check(asteroid):
-                sys.exit(f"Game Over! Score: {score}")
+                if lives < 1:
+                    sys.exit(f"Game Over! Score: {score}")
+                else:
+                    asteroid.split()
+                    lives -= 1
 
         for asteroid in asteroids:
             for shot in shots:
