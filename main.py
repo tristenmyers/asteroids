@@ -21,9 +21,11 @@ Shot.containers = (updatable, drawable, shots)
 
 
 def main():
-    pygame.init
+    pygame.init()
 
     Asteroid_Field = AsteroidField()
+
+    font = pygame.font.SysFont("verdana", 30)
 
     lives = 3
     score = 0
@@ -43,13 +45,15 @@ def main():
             if event.type == pygame.QUIT:
                 return
         pygame.Surface.fill(screen, [0,0,0])
+        life_counter = font.render(f"Lives: {lives}", True, (255, 255, 255))
+        screen.blit(life_counter, (10, 10))
         updatable.update(dt)
         for object in drawable:
             object.draw(screen)
 
         for asteroid in asteroids:
             if player_character.collision_check(asteroid):
-                if lives < 1:
+                if lives < 2:
                     sys.exit(f"Game Over! Score: {score}")
                 else:
                     asteroid.split()
