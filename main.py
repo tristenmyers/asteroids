@@ -44,9 +44,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+    
         pygame.Surface.fill(screen, [0,0,0])
         life_counter = font.render(f"Lives: {lives}", True, (255, 255, 255))
+        score_counter = font.render(f"Score: {score}", True, (255, 255, 255))
+        score_counter_size = score_counter.get_rect()
+        score_counter_size.topright = (SCREEN_WIDTH - 10, 10)
         screen.blit(life_counter, (10, 10))
+        screen.blit(score_counter, score_counter_size)
+        
         updatable.update(dt)
         for object in drawable:
             object.draw(screen)
